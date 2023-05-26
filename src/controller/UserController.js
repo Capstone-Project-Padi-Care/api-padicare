@@ -56,8 +56,12 @@ const login = async (req, res) => {
     if (bcrypt.compare(password, checkUsername[0].password))
       return res.status(200).json({
         error: false,
-        token: token,
         message: "Login successfully",
+        loginResult: {
+          userId: checkUsername[0].userId,
+          name: checkUsername[0].name,
+          token: token,
+        },
       });
   } catch (error) {
     return res.status(500).json({

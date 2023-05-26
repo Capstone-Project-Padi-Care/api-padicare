@@ -4,10 +4,11 @@ import {
   getAllPosts,
   getDetailPost,
 } from "../controller/PostController.js";
+import { auth } from "../middleware/AuthMiddleware.js";
 
 const router = express.Router();
 
-router.post("/post", uploadPostFeed);
+router.post("/post", auth, uploadPostFeed);
 router.get("/post/", getAllPosts);
 router.get("/post/:id", getDetailPost);
 
