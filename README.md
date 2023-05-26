@@ -57,17 +57,16 @@ https:://api.padicare.com/
 - Response
 ```json
 	{
-		"error": false,
-		"message": "Post successfully fetched",
-		"listPost": [
-			{
-				"id": "post-FvU4u0Vp2S3PMsFg",
-				"title": "Penyakit Hawar Daun Bakteri (HDB)",
-	            "desc" : "Penyakit hawar daun bakteri (HDB) merupakan salah satu penyakit pada tanamam padi. Penyakit ini disebabkan oleh bakteri Xanthomonas oryzae pv. oryzae (Xoo). Patogen ini dapat mengenfeksi tanaman padi pada semua fase pertumbuhan tanaman dari mulai pesemaian sampai menjelang panen.",
-		        "createdAt": "2022-01-08T06:34:18.598Z"
-			}
-		]
-		
+	"error": false,
+	"message": "Post successfully fetched",
+	"listPost": [
+		{
+		"id": "post-FvU4u0Vp2S3PMsFg",
+		"title": "Penyakit Hawar Daun Bakteri (HDB)",
+		"desc" : "Penyakit hawar daun bakteri (HDB) merupakan salah satu penyakit pada tanamam padi. Penyakit ini disebabkan oleh bakteri Xanthomonas oryzae pv. oryzae (Xoo). Patogen ini dapat mengenfeksi tanaman padi pada semua fase pertumbuhan tanaman dari mulai pesemaian sampai menjelang panen.",
+	        "createdAt": "2022-01-08T06:34:18.598Z"
+		}
+		]		
 	}
 ```
 ## Get Detail Post
@@ -83,9 +82,9 @@ https:://api.padicare.com/
 		"error": false,
 		"message": "Post successfully fetched",
 		"data": {
-				"id": "post-FvU4u0Vp2S3PMsFg",
-				"title": "Penyakit Hawar Daun Bakteri (HDB)",
-	            "desc" : "Penyakit hawar daun bakteri (HDB) merupakan salah satu penyakit pada tanamam padi. Penyakit ini disebabkan oleh bakteri Xanthomonas oryzae pv. oryzae (Xoo). Patogen ini dapat mengenfeksi tanaman padi pada semua fase pertumbuhan tanaman dari mulai pesemaian sampai menjelang panen.",
+			"id": "post-FvU4u0Vp2S3PMsFg",
+			"title": "Penyakit Hawar Daun Bakteri (HDB)",
+	           	"desc" : "Penyakit hawar daun bakteri (HDB) merupakan salah satu penyakit pada tanamam padi. Penyakit ini disebabkan oleh bakteri Xanthomonas oryzae pv. oryzae (Xoo). Patogen ini dapat mengenfeksi tanaman padi pada semua fase pertumbuhan tanaman dari mulai pesemaian sampai menjelang panen.",
 		        "createdAt": "2022-01-08T06:34:18.598Z"
 			}
 	}
