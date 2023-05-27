@@ -37,7 +37,7 @@ const User = db.define("users", {
   },
   photoUrl: {
     type: DataTypes.UUID,
-    allowNull: false,
+    allowNull: true,
   },
 });
 
