@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { Op } from "sequelize";
 
-const register = async (req, res) => {
+export const register = async (req, res) => {
   const { name, username, email, password, phoneNumber } = req.body;
   const id = `user-${uuidv4()}`;
   const hashedPassword = bcrypt.hash(password);
@@ -31,7 +31,7 @@ const register = async (req, res) => {
   }
 };
 
-const login = async (req, res) => {
+export const login = async (req, res) => {
   try {
     const { username, password } = req.body;
 
@@ -70,5 +70,3 @@ const login = async (req, res) => {
     });
   }
 };
-
-export default { register, login };

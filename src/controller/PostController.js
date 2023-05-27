@@ -1,11 +1,12 @@
-import Post from "../model/PostModel";
+import Post from "../model/PostModel.js";
+import { Storage } from "@google-cloud/storage";
 import multer from "multer";
 
 const storage = new Storage({
   keyFilename: "path/to/service-account-key.json",
 });
 
-const uploadPostFeed = async (req, res) => {
+export const uploadPostFeed = async (req, res) => {
   const { title, description } = req.body;
   const photo = req.file;
 
@@ -51,13 +52,14 @@ const uploadPostFeed = async (req, res) => {
   }
 };
 
-const getAllPosts = async (req, res) => {
-  const { page, size } = req.query;
+export const getAllPosts = async (req, res) => {
+  const page = req.query.page || 10;
+  const size = req.query.size || 1;
   const offset = (page - 1) * size;
 
   try {
     const listPost = await Post.findAll({
-      limit: size,
+      limit: parseInt(size),
       offset: offset,
     });
 
@@ -74,7 +76,7 @@ const getAllPosts = async (req, res) => {
   }
 };
 
-const getDetailPost = async (req, res) => {
+export const getDetailPost = async (req, res) => {
   const { id } = req.params;
 
   try {
@@ -102,10 +104,4 @@ const getDetailPost = async (req, res) => {
       .status(500)
       .json({ error: true, message: "Internal server error" });
   }
-};
-
-export default {
-  uploadPostFeed,
-  getAllPosts,
-  getDetailPost,
 };

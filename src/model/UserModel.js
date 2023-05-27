@@ -3,7 +3,7 @@ import db from "../config/Database.js";
 
 const { DataTypes } = Sequelize;
 
-const User = db.define("posts", {
+const User = db.define("users", {
   id: {
     type: DataTypes.STRING,
     allowNull: false,
