@@ -56,18 +56,23 @@ https:://api.padicare.com/
     -   `Authorization`:  `Bearer <token>`
 - Response
 ```json
-	{
-	"error": false,
-	"message": "Post successfully fetched",
-	"listPost": [
-		{
-		"id": "post-FvU4u0Vp2S3PMsFg",
-		"title": "Penyakit Hawar Daun Bakteri (HDB)",
-		"desc" : "Penyakit hawar daun bakteri (HDB) merupakan salah satu penyakit pada tanamam padi. Penyakit ini disebabkan oleh bakteri Xanthomonas oryzae pv. oryzae (Xoo). Patogen ini dapat mengenfeksi tanaman padi pada semua fase pertumbuhan tanaman dari mulai pesemaian sampai menjelang panen.",
-	        "createdAt": "2022-01-08T06:34:18.598Z"
-		}
-		]		
-	}
+{
+    "error": false,
+    "message": "Posts successfully fetched",
+    "listPost": [
+        {
+            "id": "post-747bc9de-ba4a-4332-beff-af75af44b0c6",
+            "title": "test 1",
+            "description": null,
+            "userId": "user-86da26c2-05f0-4433-980e-dcf296ff6fe5",
+            "photoUrl": "https://storage.googleapis.com/padicare/4bf3e43f-1d46-4431-aa63-12a314aa0f71.jpeg",
+            "like": null,
+            "views": null,
+            "createdAt": "2023-05-29T06:35:27.000Z",
+            "updatedAt": "2023-05-29T06:35:27.000Z"
+        }
+    ]
+}
 ```
 ## Get Detail Post
 - URL
@@ -78,16 +83,21 @@ https:://api.padicare.com/
     -   `Authorization`:  `Bearer <token>`
 - Response
 ```json
-	{
-		"error": false,
-		"message": "Post successfully fetched",
-		"data": {
-			"id": "post-FvU4u0Vp2S3PMsFg",
-			"title": "Penyakit Hawar Daun Bakteri (HDB)",
-	           	"desc" : "Penyakit hawar daun bakteri (HDB) merupakan salah satu penyakit pada tanamam padi. Penyakit ini disebabkan oleh bakteri Xanthomonas oryzae pv. oryzae (Xoo). Patogen ini dapat mengenfeksi tanaman padi pada semua fase pertumbuhan tanaman dari mulai pesemaian sampai menjelang panen.",
-		        "createdAt": "2022-01-08T06:34:18.598Z"
-			}
-	}
+{
+    "error": false,
+    "message": "Post successfully fetched",
+    "data": {
+        "id": "post-747bc9de-ba4a-4332-beff-af75af44b0c6",
+        "title": "test 1",
+        "description": null,
+        "userId": "user-86da26c2-05f0-4433-980e-dcf296ff6fe5",
+        "photoUrl": "https://storage.googleapis.com/padicare/4bf3e43f-1d46-4431-aa63-12a314aa0f71.jpeg",
+        "like": null,
+        "views": null,
+        "createdAt": "2023-05-29T06:35:27.000Z",
+        "updatedAt": "2023-05-29T06:35:27.000Z"
+    }
+}
 ```
 
 ## Login
