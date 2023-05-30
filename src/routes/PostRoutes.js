@@ -5,11 +5,13 @@ import {
   getDetailPost,
 } from "../controller/PostController.js";
 import { auth } from "../middleware/AuthMiddleware.js";
+import multer from "multer";
 
+const upload = multer({ dest: "uploads/" });
 const router = express.Router();
 
-router.post("/post", auth, uploadPostFeed);
-router.get("/post/", getAllPosts);
-router.get("/post/:id", getDetailPost);
+router.post("/posts", auth, upload.single("photo"), uploadPostFeed);
+router.get("/posts/", getAllPosts);
+router.get("/posts/:id", getDetailPost);
 
 export default router;

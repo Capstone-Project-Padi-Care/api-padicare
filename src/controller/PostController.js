@@ -1,9 +1,11 @@
 import Post from "../model/PostModel.js";
+import User from "../model/UserModel.js";
 import { Storage } from "@google-cloud/storage";
-import multer from "multer";
+import { v4 as uuidv4 } from "uuid";
 
 const storage = new Storage({
-  keyFilename: "path/to/service-account-key.json",
+  projectId: "padicare",
+  keyFilename: "credentials.json",
 });
 
 export const uploadPostFeed = async (req, res) => {
@@ -22,20 +24,20 @@ export const uploadPostFeed = async (req, res) => {
     });
   }
 
-  const bucketName = "your-bucket-name"; //edit this
+  const bucketName = "padicare"; //edit this
   const fileName = `${uuidv4()}.${photo.mimetype.split("/")[1]}`;
 
   try {
-    const bucket = storage.bucket(bucketName);
-    await bucket.upload(photo.path, {
-      destination: fileName,
-      public: true,
-    });
+    // const bucket = storage.bucket(bucketName);
+    // await bucket.upload(photo.path, {
+    //   destination: fileName,
+    //   public: true,
+    // });
 
     await Post.create({
       id: `post-${uuidv4()}`,
       title: title,
-      descrirption: description,
+      description: description,
       photoUrl: `https://storage.googleapis.com/${bucketName}/${fileName}`,
       userId: req.body.userId,
     });
@@ -53,14 +55,17 @@ export const uploadPostFeed = async (req, res) => {
 };
 
 export const getAllPosts = async (req, res) => {
-  const page = req.query.page || 10;
-  const size = req.query.size || 1;
+  const page = req.query.page;
+  const size = req.query.size;
   const offset = (page - 1) * size;
 
   try {
     const listPost = await Post.findAll({
       limit: parseInt(size),
       offset: offset,
+      include: [
+        { model: User, as: "user", attributes: ["username", "photoUrl"] },
+      ],
     });
 
     return res.status(200).json({
