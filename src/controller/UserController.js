@@ -88,7 +88,7 @@ export const login = async (req, res) => {
         error: false,
         message: "Login successfully",
         loginResult: {
-          userId: checkUsername[0].userId,
+          userId: checkUsername[0].id,
           name: checkUsername[0].name,
           token: token,
         },
@@ -115,6 +115,14 @@ export const getUser = async (req, res) => {
       where: {
         id: id,
       },
+      attributes: [
+        "name",
+        "username",
+        "email",
+        "createdAt",
+        "photoUrl",
+        "phoneNumber",
+      ],
     });
 
     if (user) {
