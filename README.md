@@ -2,6 +2,22 @@
 ## Base url
 https:://api.padicare.com/
 
+## List Features Worked
+  - Login
+  - Register
+  - Get Post
+  - Add Post
+  - Get Comment
+  - Delete Comment
+
+
+## List Features still being developed 
+  - Update Profile
+  - Scan Image
+  - Update Profile
+  - Update Photo Profile User
+  - Logout
+
 ## Scan image
  
 - URL
@@ -35,40 +51,49 @@ https:://api.padicare.com/
     -   `Authorization`:  `Bearer <token>`
 -   Request Body
 	- `title` as `string`
-	- `description` as `string`
-    -   `photo`  as  `file`, must be a valid image file, max size 1MB
+  	- `description` as `string`
+    -  `photo`  as  `file`, must be a valid image file, max size 1MB
 - Response 
-```json
-	{
-		"error": false,
-		"message": "Post success created"
-	}
-``` 
+    ```json
+        {
+            "error": false,
+            "message": "Post success created"
+        }
+    ``` 
 ##  Get All Post
 - URL
 	- /post
 - Method
 	- GET
- -   Parameters
-	 - `page`  as  `int`, optional
-	  - `size`  as  `int`, optional
--   Headers
-    -   `Authorization`:  `Bearer <token>`
+- Parameters
+	- `page`  as  `int`, optional
+	- `size`  as  `int`, optional
+- Headers
+    - `Authorization`:  `Bearer <token>`
 - Response
-```json
-	{
-	"error": false,
-	"message": "Post successfully fetched",
-	"listPost": [
-		{
-		"id": "post-FvU4u0Vp2S3PMsFg",
-		"title": "Penyakit Hawar Daun Bakteri (HDB)",
-		"desc" : "Penyakit hawar daun bakteri (HDB) merupakan salah satu penyakit pada tanamam padi. Penyakit ini disebabkan oleh bakteri Xanthomonas oryzae pv. oryzae (Xoo). Patogen ini dapat mengenfeksi tanaman padi pada semua fase pertumbuhan tanaman dari mulai pesemaian sampai menjelang panen.",
-	        "createdAt": "2022-01-08T06:34:18.598Z"
-		}
-		]		
-	}
-```
+    ```json
+    {
+        "error": false,
+        "message": "Posts successfully fetched",
+        "listPost": [
+            {
+                "id": "post-7b12e659-e7ac-43c2-bad3-6486427c3c68",
+                "title": "hello",
+                "description": "test post",
+                "userId": "user-94076d92-a1d9-4672-a503-5dec3517f91f",
+                "photoUrl": "https://storage.googleapis.com/padicare/290183b1-6666-4eb5-837d-9470f9fc642a.jpeg",
+                "like": 0,
+                "views": 0,
+                "createdAt": "2023-05-31T02:46:14.000Z",
+                "updatedAt": "2023-05-31T02:46:14.000Z",
+                "user": {
+                    "username": "user-1",
+                    "photoUrl": null
+                }
+            }
+        ]
+    }
+    ```
 ## Get Detail Post
 - URL
 	- /post/:id
@@ -77,18 +102,23 @@ https:://api.padicare.com/
 -   Headers
     -   `Authorization`:  `Bearer <token>`
 - Response
-```json
-	{
-		"error": false,
-		"message": "Post successfully fetched",
-		"data": {
-			"id": "post-FvU4u0Vp2S3PMsFg",
-			"title": "Penyakit Hawar Daun Bakteri (HDB)",
-	           	"desc" : "Penyakit hawar daun bakteri (HDB) merupakan salah satu penyakit pada tanamam padi. Penyakit ini disebabkan oleh bakteri Xanthomonas oryzae pv. oryzae (Xoo). Patogen ini dapat mengenfeksi tanaman padi pada semua fase pertumbuhan tanaman dari mulai pesemaian sampai menjelang panen.",
-		        "createdAt": "2022-01-08T06:34:18.598Z"
-			}
-	}
-```
+    ```json
+    {
+        "error": false,
+        "message": "Post successfully fetched",
+        "data": {
+            "id": "post-7b12e659-e7ac-43c2-bad3-6486427c3c68",
+            "title": "post test",
+            "description": "post test 1",
+            "userId": "user-94076d92-a1d9-4672-a503-5dec3517f91f",
+            "photoUrl": "https://storage.googleapis.com/padicare/290183b1-6666-4eb5-837d-9470f9fc642a.jpeg",
+            "like": 0,
+            "views": 0,
+            "createdAt": "2023-05-31T02:46:14.000Z",
+            "updatedAt": "2023-05-31T02:46:14.000Z"
+        }
+    }
+    ```
 
 ## Login
 
@@ -126,25 +156,50 @@ https:://api.padicare.com/
     
     ```json
     {
-      "error": false,
-      "message": "User Created"
+        "error": false,
+        "message": "User Created"
     }
     ```
-##  Update User
+
+## Add Comment
 
 -   URL
-    -   `/user`
+    -   `/posts/:idPost/comment`
 -   Method
-    -   PUT
+    -   POST
 -   Request Body
-    -   `name`  as  `string`
-    -   `email`  as  `string`, must be unique
-    -   `password`  as  `string`, must be at least 8 characters
+    -   `comment`  as  `string`
 -   Response
     
     ```json
     {
-      "error": false,
-      "message": "User Edited"
+        "error": false,
+        "message": "Comment added!"
     }
     ```
+
+## Get Comment
+-   URL
+    -   `/posts/:idPost/comment`
+-   Method
+    -   GET
+-   Request Body
+    -   `comment`  as  `string`
+-   Response
+    
+    ```json
+    {
+        "error": false,
+        "listComment": [
+            {
+                "id": "comment-c3b47a6f-bd3a-43d0-ba19-0f8a7a6ade6b",
+                "comment": "coba 1",
+                "userId": "user-94076d92-a1d9-4672-a503-5dec3517f91f",
+                "postId": "post-7b12e659-e7ac-43c2-bad3-6486427c3c68",
+                "createdAt": "2023-05-31T05:18:44.000Z",
+                "updatedAt": "2023-05-31T05:18:44.000Z"
+            }
+        ]
+    }
+    ```
+

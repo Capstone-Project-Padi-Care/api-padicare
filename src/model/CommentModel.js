@@ -1,22 +1,17 @@
 import { Sequelize } from "sequelize";
 import db from "../config/Database.js";
-import User from "../model/UserModel.js";
 
 const { DataTypes } = Sequelize;
 
-const Post = db.define(
-  "posts",
+const Comment = db.define(
+  "comments",
   {
     id: {
       type: DataTypes.STRING,
       allowNull: false,
       primaryKey: true,
     },
-    title: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    description: {
+    comment: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -24,17 +19,9 @@ const Post = db.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    photoUrl: {
+    postId: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
-    like: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
-    },
-    views: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
     },
   },
   {
@@ -42,15 +29,7 @@ const Post = db.define(
     timestamps: true,
   }
 );
-
-Post.belongsTo(User, {
-  foreignKey: {
-    name: "userId",
-    type: DataTypes.STRING,
-  },
-});
-
-export default Post;
+export default Comment;
 
 (async () => {
   await db.sync();

@@ -25,7 +25,7 @@ const User = db.define("users", {
   },
   phoneNumber: {
     type: DataTypes.UUID,
-    allowNull: false,
+    allowNull: true,
   },
   token: {
     type: DataTypes.STRING,

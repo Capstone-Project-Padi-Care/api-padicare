@@ -1,11 +1,12 @@
 import { Sequelize } from "sequelize";
 
-const DB_NAME = "padicare_db";
-const DB_PASSWORD = "";
-const DB_USERNAME = "root";
+const dbName = "padicare_db";
+const dbPassword = "";
+const dbUsername = "root";
+const dbHost = process.env.DB_HOST;
 
-const db = new Sequelize(DB_NAME, DB_USERNAME, DB_PASSWORD, {
-  host: "localhost",
+const db = new Sequelize(dbName, dbUsername, "", {
+  host: dbHost,
   dialect: "mysql",
 });
 
