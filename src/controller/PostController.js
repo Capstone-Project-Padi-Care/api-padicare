@@ -3,6 +3,7 @@ import User from "../model/UserModel.js";
 import { Storage } from "@google-cloud/storage";
 import { v4 as uuidv4 } from "uuid";
 import jwt from "jsonwebtoken";
+import Like from "../model/LikeModel.js";
 
 const storage = new Storage({
   projectId: "padicare",
@@ -62,8 +63,8 @@ export const uploadPostFeed = async (req, res) => {
 };
 
 export const getAllPosts = async (req, res) => {
-  const page = req.query.page;
-  const size = req.query.size;
+  const page = req.query.page || 1;
+  const size = req.query.size || 5;
   const offset = (page - 1) * size;
 
   try {
@@ -116,5 +117,30 @@ export const getDetailPost = async (req, res) => {
     return res
       .status(500)
       .json({ error: true, message: "Internal server error" });
+  }
+};
+
+export const viewPost = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    await Post.increment(
+      {
+        views: 1,
+      },
+      {
+        where: { id },
+      }
+    );
+
+    return res.status(200).json({
+      error: false,
+      message: "Post success liked!",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      error: true,
+      message: "Internal server error",
+    });
   }
 };

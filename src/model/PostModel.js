@@ -1,6 +1,7 @@
 import { Sequelize } from "sequelize";
 import db from "../config/Database.js";
 import User from "../model/UserModel.js";
+import Like from "../model/LikeModel.js";
 
 const { DataTypes } = Sequelize;
 
@@ -28,10 +29,6 @@ const Post = db.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    like: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
-    },
     views: {
       type: DataTypes.INTEGER,
       defaultValue: 0,
@@ -46,6 +43,13 @@ const Post = db.define(
 Post.belongsTo(User, {
   foreignKey: {
     name: "userId",
+    type: DataTypes.STRING,
+  },
+});
+
+Post.hasMany(Like, {
+  foreignKey: {
+    name: "postId",
     type: DataTypes.STRING,
   },
 });

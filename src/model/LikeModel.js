@@ -4,17 +4,13 @@ import User from "./UserModel.js";
 
 const { DataTypes } = Sequelize;
 
-const Comment = db.define(
-  "comments",
+const Like = db.define(
+  "likes",
   {
     id: {
       type: DataTypes.STRING,
       allowNull: false,
       primaryKey: true,
-    },
-    comment: {
-      type: DataTypes.STRING,
-      allowNull: false,
     },
     userId: {
       type: DataTypes.STRING,
@@ -26,19 +22,19 @@ const Comment = db.define(
     },
   },
   {
-    freezeTableName: true,
     timestamps: true,
   }
 );
 
-Comment.belongsTo(User, {
+Like.belongsTo(User, {
   foreignKey: {
-    type: DataTypes.STRING,
     name: "userId",
+    type: DataTypes.STRING,
   },
+  as: "user",
 });
 
-export default Comment;
+export default Like;
 
 (async () => {
   await db.sync();

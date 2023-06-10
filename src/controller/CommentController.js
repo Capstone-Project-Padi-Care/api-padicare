@@ -1,5 +1,6 @@
 import Comment from "../model/CommentModel.js";
 import { v4 as uuidv4 } from "uuid";
+import User from "../model/UserModel.js";
 import jwt from "jsonwebtoken";
 
 export const getCommnet = async (req, res) => {
@@ -13,6 +14,10 @@ export const getCommnet = async (req, res) => {
       where: { postId: idPost },
       limit: parseInt(size),
       offset: offset,
+      include: [
+        { model: User, as: "user", attributes: ["username", "photoUrl"] },
+      ],
+      order: [["createdAt", "DESC"]],
     });
     return res.status(200).json({
       error: false,

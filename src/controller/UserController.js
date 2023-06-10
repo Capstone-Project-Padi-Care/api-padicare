@@ -97,13 +97,35 @@ export const login = async (req, res) => {
 
     return res.status(403).json({
       error: true,
-      message: "Login fail!",
+      message: "Login fail, your credential does not match!",
     });
   } catch (error) {
     console.error("Error login:", error);
     return res.status(500).json({
       error: true,
       message: "Internal server error",
+    });
+  }
+};
+
+export const logout = async (req, res) => {
+  const secretKey = process.env.ACCESS_TOKEN_SECRET;
+  const authHeader = req.headers.authorization;
+  const token = authHeader && authHeader.split(" ")[1];
+
+  const decodedToken = jwt.verify(token, secretKey);
+
+  try {
+    await User.update({ token: null }, { where: { id: decodedToken.userId } });
+
+    return res.status(200).json({
+      error: false,
+      message: "Logout succesfully!",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      error: true,
+      message: "Internal Server Error!",
     });
   }
 };
@@ -149,42 +171,37 @@ export const updateUser = async (req, res) => {
   try {
     const { id } = req.params;
     const { name, email, password, phoneNumber } = req.body;
-    const hashedPassword = await bcrypt.hash("password", 10);
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-    const checkUsername = await User.findAll({
-      where: {
-        [Op.or]: [{ username: username }, { email: username }],
-      },
+    const findUser = await User.findOne({
+      where: { id: id },
     });
 
-    if (checkUsername.length && checkUsername[0].email == email) {
-      if (password != null) {
-        await User.update(
-          {
-            id,
-            name,
-            email,
-            password: hashedPassword,
-            phoneNumber,
-          },
-          { where: { id: id } }
-        );
-      } else {
-        await User.update(
-          {
-            id,
-            name,
-            email,
-            phoneNumber,
-          },
-          { where: { id: id } }
-        );
+    if (findUser.email == email) {
+      await User.update({ name, phoneNumber }, { where: { id } });
+
+      if (password) {
+        await User.update({ password: hashedPassword }, { where: { id } });
       }
-    } else if (checkUsername.length && checkUsername[0].email != email) {
-      return res.status(400).json({
-        error: true,
-        message: "Email is already used!",
+      return res.status(200).json({
+        error: false,
+        message: "User Updated!",
       });
+    } else {
+      const checkEmail = await User.findAll({ where: { email } });
+
+      if (checkEmail.length) {
+        return res.status(400).json({
+          error: true,
+          message: "Email already used!",
+        });
+      }
+    }
+
+    await User.update({ name, phoneNumber, email }, { where: { id } });
+
+    if (password) {
+      await User.update({ password: hashedPassword }, { where: { id } });
     }
 
     return res.status(200).json({
