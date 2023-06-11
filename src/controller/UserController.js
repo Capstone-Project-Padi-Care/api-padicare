@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import jwt from "jsonwebtoken";
 import { Op } from "sequelize";
 import { Storage } from "@google-cloud/storage";
+import { unlinkSync } from "fs";
 
 const storage = new Storage({
   projectId: "padicare",
@@ -236,10 +237,29 @@ export const postPhoto = async (req, res) => {
 
   try {
     const bucket = storage.bucket(bucketName);
+    const user = await User.findOne({ where: { id } });
+
+    if (!user) {
+      return res.status(404).json({
+        error: true,
+        message: "User not found",
+      });
+    }
+
+    if (user.photoUrl) {
+      const imageName = user.photoUrl.substring(
+        user.photoUrl.lastIndexOf("/") + 1
+      );
+      const file = bucket.file(imageName);
+      await file.delete();
+    }
+
     await bucket.upload(photo.path, {
       destination: fileName,
       public: true,
     });
+
+    unlinkSync(req.file.path);
 
     await User.update(
       {
