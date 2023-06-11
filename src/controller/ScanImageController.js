@@ -30,8 +30,6 @@ export const scanImage = async (req, res) => {
     // Perform the classification
     const predictions = await classifyImage(preprocessedImage);
 
-    console.log(predictions);
-
     const max = Math.max(...predictions);
 
     const index = predictions.indexOf(max);
