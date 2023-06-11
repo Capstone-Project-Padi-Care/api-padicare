@@ -203,3 +203,37 @@ https:://api.padicare.com/
     }
     ```
 
+## Dependencies
+
+# Google Cloud Storage
+https://cloud.google.com/storage/docs
+
+# Tensorflow JS
+https://www.tensorflow.org/js
+
+# Bcrypt
+https://www.npmjs.com/package/bcrypt
+
+# Body Parser
+https://www.npmjs.com/package/body-parser
+
+# Dotenv
+https://www.npmjs.com/package/dotenv
+
+# Express JS
+https://expressjs.com/
+
+# JSON Webtoken
+https://www.npmjs.com/package/jsonwebtoken
+
+# Multer
+https://www.npmjs.com/package/multer
+
+# MySQL
+https://dev.mysql.com/doc/
+
+# Sequelize
+https://www.npmjs.com/package/sequelize
+
+# UUID
+https://www.npmjs.com/package/uuid
