@@ -19,7 +19,7 @@ router.post("/login", login);
 router.post("/register", register);
 router.get("/user/:id", getUser);
 router.put("/user/:id", updateUser);
-router.post("/user/:id/postPhoto", auth, upload.single("photo"), postPhoto);
+router.post("/user/:id/postPhoto", upload.single("photo"), postPhoto);
 router.delete("/logout", auth, logout);
 
 export default router;
