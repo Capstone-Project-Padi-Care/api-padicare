@@ -1,22 +1,20 @@
 # Api Specs PadiCare App
 ## Base url
-https:://api.padicare.com/
+https://api-padicare-services-u32uxejmvq-et.a.run.app/
 
-## List Features Worked
+## List Features
   - Login
   - Register
   - Get Post
   - Add Post
+  - Add Comment
   - Get Comment
   - Delete Comment
-
-
-## List Features still being developed 
-  - Update Profile
   - Scan Image
-  - Update Profile
   - Update Photo Profile User
+  - Update Profil
   - Logout
+
 
 ## Scan image
  
